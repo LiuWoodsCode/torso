@@ -85,7 +85,7 @@ def generate_sine_wave():
     return frequency, sample_rate, sine_wave
     
 # --- Main Conjuration Routine ---
-def generate_video(width=1920, height=1080, num_slides=10, slide_duration=1.0, font="arial.ttf", font_size=24, displayed_file_name="aqua.flv", min_freq=300, max_freq=1000, file_name="torso_output.mp4", fps=25):
+def generate_video(width=640, height=360, num_slides=10, slide_duration=1.0, font="arial.ttf", font_size=24, displayed_file_name="aqua.flv", min_freq=300, max_freq=1000, file_name="torso_output.mp4", fps=25):
     slide_clips = []   # To collect visual clips of each slide
     audio_segments = []  # To collect corresponding audio tones
 
