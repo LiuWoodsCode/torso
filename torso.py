@@ -5,7 +5,7 @@ from moviepy.audio.AudioClip import AudioArrayClip
 from PIL import Image, ImageDraw, ImageFont
 
 # --- Configuration Parameters ---      
-SAMPLE_RATE = 500000     # Audio sample rate in Hz
+SAMPLE_RATE = 96000     # Audio sample rate in Hz
 
 def generate_slide(slide_number, width=1920, height=1080, fontname="arial.ttf", font_size=24, file_name="aqua.flv"):
     # Create a pure white canvas
@@ -85,7 +85,52 @@ def generate_sine_wave():
     return frequency, sample_rate, sine_wave
     
 # --- Main Conjuration Routine ---
-def generate_video(width=640, height=360, num_slides=10, slide_duration=1.0, font="arial.ttf", font_size=24, displayed_file_name="aqua.flv", min_freq=300, max_freq=1000, file_name="torso_output.mp4", fps=25):
+def generate_video(width=640, height=360, num_slides=10, slide_duration=1.0, font="arial.ttf", font_size=24, displayed_file_name="aqua.flv", min_freq=400, max_freq=10000, file_name="torso_output.mp4", fps=25):
+    """
+    Generates a slideshow video with randomly placed geometric shapes and synthesized audio, 
+    inspired by the mysterious "Webdriver Torso" YouTube channel.
+
+    Args:
+        width (int, optional): The width of the generated slides in pixels. Defaults to 1920.
+        height (int, optional): The height of the generated slides in pixels. Defaults to 1080.
+        num_slides (int, optional): The number of slides to generate. Defaults to 10.
+        slide_duration (float, optional): Duration of each slide in seconds. Defaults to 1.0.
+        font (str, optional): Path to the font file used for slide text. Defaults to "arial.ttf".
+        font_size (int, optional): Font size for the slide text. Defaults to 24.
+        displayed_file_name (str, optional): The file name displayed on the slides. Defaults to "aqua.flv".
+        min_freq (int, optional): Minimum frequency for generated tones in Hz. Defaults to 300.
+        max_freq (int, optional): Maximum frequency for generated tones in Hz. Defaults to 1000.
+        file_name (str, optional): Name of the output video file. Defaults to "torso_output.mp4".
+        fps (int, optional): Frames per second for the generated video. Defaults to 25.
+
+    Returns:
+        None: The function generates and saves a video file containing slides and audio.
+
+    Context:
+        - Inspired by "Webdriver Torso," a YouTube channel that became an internet mystery in 2014 
+          due to its endless uploads of simple test videos featuring colored rectangles and electronic tones.
+        - The channel was later revealed to be an automated test system used by Google to assess video quality.
+        - This function replicates that eerie, algorithmic aesthetic by generating slides with randomly placed 
+          blue and red rectangles, overlaid with a simple identifying text label.
+        - Each slide is accompanied by a randomly generated sine wave tone, mimicking Webdriver Torso’s signature 
+          beeping sounds.
+
+    Notes:
+        - The generated video is encoded in H.264 with AAC audio.
+        - Each slide lasts for the specified duration, with an accompanying randomized audio tone.
+        - The text overlay follows Webdriver Torso’s naming convention, displaying the given file name 
+          and the current slide number.
+
+    Example:
+        Default usage:
+        torso.generate_video(640, 360, 10, 1.0, "arial.ttf", 24, "aqua.flv", 400, 1000, "torso_output.mp4", 25)
+
+        Customized usage:
+        torso.generate_video(width=1280, height=720, num_slides=20, slide_duration=2.0, font="arial.ttf", 
+                       font_size=32, displayed_file_name="mystery.avi", min_freq=400, max_freq=1000, 
+                       file_name="webdriver_torso.mp4", fps=30)
+    """
+    # Initialize lists to store video and audio components 
     slide_clips = []   # To collect visual clips of each slide
     audio_segments = []  # To collect corresponding audio tones
 
